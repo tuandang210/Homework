@@ -42,6 +42,8 @@ public class Main {
                 case 7:
                     manage.insertionSortAndDisplay();
                     break;
+                case 0:
+                    System.exit(0);
             }
         } while (choice != 0);
     }
