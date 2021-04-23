@@ -1,12 +1,10 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Manage {
     Scanner sc = new Scanner(System.in);
     List<AllLibrary> allLibraries = new ArrayList<>();
 
-    public Manage(){
+    public Manage() {
     }
 
     public Manage(List<AllLibrary> allLibraries) {
@@ -43,6 +41,7 @@ public class Manage {
             for (int j = 0; j < allLibraries.size(); j++) {
                 if (sortedArray[i].equals(allLibraries.get(j).getPublisher())) {
                     System.out.println(allLibraries.get(j).toString());
+                    Collections.swap(allLibraries, j, i);
                 }
             }
         }
@@ -53,6 +52,16 @@ public class Manage {
         for (int i = 0; i < ids.length; i++) {
             ids[i] = allLibraries.get(i).getId();
         }
+
+        for (int i = 1; i < ids.length; i++) {
+            int temp = ids[i];
+            int j = i - 1;
+            for (; j >= 0 && ids[j] > temp; j--) {
+                ids[j + 1] = ids[j];
+            }
+            ids[j + 1] = temp;
+        }
+
         int check = findId(ids);
         if (check == -1) {
             System.out.println("Không tìm được id đó");
