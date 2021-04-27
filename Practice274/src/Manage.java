@@ -49,8 +49,8 @@ public class Manage {
         System.out.println(students);
     }
 
-    public boolean inputStudentInfor() {
-        return students.add(new Student().inputStudent());
+    public void inputStudentInfor() {
+        students.add(new Student().inputStudent());
     }
 
     public  List<Student> readDataFromFile(String path) {
