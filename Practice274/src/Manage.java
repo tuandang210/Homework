@@ -37,10 +37,16 @@ public class Manage {
         }
     }
 
-    public void sortStudentByScore() {
-        for(int i = 0; i< students.size(); i++){
-            if(students.get(i).getScore()>=8){
-                System.out.println(students.get(i)+"\n");
+    public void showStudentHighScore() {
+        int max = students.get(0).getScore();
+        for (Student student : students) {
+            if (max < student.getScore()) {
+                max = student.getScore();
+            }
+        }
+        for (Student student : students) {
+            if (student.getScore() == max) {
+                System.out.println(student + "\n");
             }
         }
     }

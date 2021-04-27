@@ -1,4 +1,3 @@
-import java.io.*;
 import java.util.*;
 
 public class Main{
@@ -40,7 +39,7 @@ public class Main{
                     manage.bubbleSortScore();
                     break;
                 case 6:
-                    manage.sortStudentByScore();
+                    manage.showStudentHighScore();
                     break;
                 case 7:
                     manage.findStudentById();
