@@ -3,34 +3,35 @@ import java.util.*;
 
 public class Manage {
     List<Student> students = new ArrayList<>();
-    Scanner sc =new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);
+
     public void readDataFromFile() {
         sc.nextLine();
         System.out.println("Nhập đường dẫn file cần đọc");
         String studentData1 = sc.nextLine();
-        List<Student> x = readDataFromFile(studentData1);
-        for(Student e : students){
+        readDataFromFile(studentData1);
+        for (Student e : students) {
             System.out.println(e);
         }
     }
 
     public void countStudentByClass() {
-        HashMap<String,Integer> abc = new HashMap<>();
-        for(Student student: students){
-            if(abc.containsKey(student.getInClass())){
-                abc.put(student.getInClass(), abc.get(student.getInClass())+1);
+        HashMap<String, Integer> abc = new HashMap<>();
+        for (Student student : students) {
+            if (abc.containsKey(student.getInClass())) {
+                abc.put(student.getInClass(), abc.get(student.getInClass()) + 1);
             } else {
                 abc.put(student.getInClass(), 1);
             }
         }
-        for (Map.Entry<String, Integer> entry : abc.entrySet()){
-            System.out.println("Lớp "+ entry.getKey()+" có " +entry.getValue()+" sinh viên.");
+        for (Map.Entry<String, Integer> entry : abc.entrySet()) {
+            System.out.println("Lớp " + entry.getKey() + " có " + entry.getValue() + " sinh viên.");
         }
     }
 
     public void findStudentById() {
         int c = checkId();
-        if(c==-1){
+        if (c == -1) {
             System.out.println("Không có mã sinh viên này");
         } else {
             System.out.println(students.get(c).toString());
@@ -56,21 +57,19 @@ public class Manage {
     }
 
     public void inputStudentInfor() {
-        students.add(new Student().inputStudent());
+        students.add(inputStudent());
     }
 
-    public  List<Student> readDataFromFile(String path) {
-        List<Student> products = new ArrayList<>();
+    public void readDataFromFile(String path) {
         try {
             FileInputStream fis = new FileInputStream(path);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            products = (List<Student>) ois.readObject();
+            students = (List<Student>) ois.readObject();
             fis.close();
             ois.close();
         } catch (IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
         }
-        return products;
     }
 
     public void writeDataToFile() {
@@ -86,7 +85,7 @@ public class Manage {
         }
     }
 
-    public  void bubbleSortScore() {
+    public void bubbleSortScore() {
         for (int i = 0; i < students.size() - 1; i++) {
             for (int j = 0; j < students.size() - i - 1; j++) {
                 if (students.get(j).getScore() < students.get(j + 1).getScore()) {
@@ -147,7 +146,31 @@ public class Manage {
         if (a == -1) {
             System.out.println("Không có mã sinh viên này");
         } else {
-            students.set(a, new Student().inputStudent());
+            students.set(a, inputStudent());
         }
+    }
+
+    public Student inputStudent() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Nhập thông tin sinh viên");
+        System.out.println("Nhập mã sinh viên: ");
+        int id = sc.nextInt();
+        for (Student student : students) {
+            if (student.getId() == id) {
+                System.out.println("Mã sinh viên đã tồn tại");
+                sc.nextLine();
+                return inputStudent();
+            }
+        }
+        sc.nextLine();
+        System.out.println("Nhập tên sinh viên: ");
+        String name = sc.nextLine();
+        System.out.println("Nhập quê quán: ");
+        String homeTown = sc.nextLine();
+        System.out.println("Nhập lớp: ");
+        String inClass = sc.nextLine();
+        System.out.println("Nhập điểm: ");
+        int score = sc.nextInt();
+        return new Student(id, name, homeTown, inClass, score);
     }
 }

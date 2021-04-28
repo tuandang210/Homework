@@ -61,23 +61,6 @@ public class Student implements Serializable {
         this.score = score;
     }
 
-    public Student inputStudent(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Nhập thông tin sinh viên");
-        System.out.println("Nhập mã sinh viên: ");
-        id = sc.nextInt();
-        sc.nextLine();
-        System.out.println("Nhập tên sinh viên: ");
-        name = sc.nextLine();
-        System.out.println("Nhập quê quán: ");
-        homeTown = sc.nextLine();
-        System.out.println("Nhập lớp: ");
-        inClass = sc.nextLine();
-        System.out.println("Nhập điểm: ");
-        score = sc.nextInt();
-        return this;
-    }
-
     @Override
     public String toString() {
         return "Student{" +
